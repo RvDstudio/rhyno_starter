@@ -47,20 +47,24 @@ const Sidebar = () => {
             {menu.gap && (
               <div className="my-4 border-t border-dashed border-[#6699CC] dark:border-gray-600" />
             )}
-            <li className="">
+            <li className="group">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
-                      className={`w-full flex items-center space-x-2 hover:bg-gray-100 dark:hover:bg-[#292929] active:bg-gray-300 py-3 px-2 rounded-lg text-gray-400 ${
+                      className={`w-full flex items-center space-x-2 hover:bg-gray-700 dark:hover:bg-gray-700 active:bg-gray-300 py-3 px-2 rounded-lg text-gray-400 group-hover:text-white ${
                         isActive(menu.path)
-                          ? "bg-gray-100 text-gray-300 dark:bg-[#292929]"
+                          ? "bg-gray-700 text-white dark:bg-[#292929]"
                           : ""
                       }`}
                       href={menu.path}
                     >
                       {menu.icon && (
-                        <span className="mr-0.5 text-gray-600 dark:text-[#888888]">
+                        <span
+                          className={`mr-0.5 text-gray-600 group-hover:text-yellow-500  dark:text-[#888888] ${
+                            isActive(menu.path) ? " text-yellow-500" : ""
+                          }`}
+                        >
                           {menu.icon}
                         </span>
                       )}
