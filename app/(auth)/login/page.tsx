@@ -7,7 +7,7 @@ export default async function LoginPage() {
     <div className="w-full lg:grid  lg:grid-cols-2 ">
       <div className="flex flex-col items-center justify-center py-12">
         <div className="grid gap-2 text-center">
-          <h1 className="text-3xl font-bold">Login</h1>
+          <h1 className="text-3xl text-yellow-500">Login</h1>
           <p className="text-balance text-muted-foreground mb-6">
             Enter your email below to login to your account
           </p>

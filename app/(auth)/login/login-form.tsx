@@ -1,13 +1,16 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import { LoginUserInput, loginUserSchema } from "@/lib/user-schema";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -19,6 +22,7 @@ export const LoginForm = () => {
 
   const methods = useForm<LoginUserInput>({
     resolver: zodResolver(loginUserSchema),
+    mode: "onChange", // Ensures errors are updated as you type
   });
 
   const {
@@ -42,11 +46,11 @@ export const LoginForm = () => {
       setSubmitting(false);
 
       if (!res?.error) {
-        toast.success("successfully logged in");
+        toast.success("Successfully logged in");
         router.push(callbackUrl);
       } else {
         reset({ password: "" });
-        const message = "invalid email or password";
+        const message = "Invalid email or password";
         toast.error(message);
         setError(message);
       }
@@ -62,65 +66,70 @@ export const LoginForm = () => {
     "form-control block w-full px-4 py-5 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none";
 
   return (
-    <form className="w-[400px]" onSubmit={handleSubmit(onSubmitHandler)}>
-      {error && (
-        <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
-      )}
-      <div className="mb-6">
-        <input
-          type="email"
-          {...register("email")}
-          placeholder="Email address"
-          className={`${input_style} py-[15px]`}
-        />
-        {errors["email"] && (
-          <span className="text-red-500 text-xs pt-1 block">
-            {errors["email"]?.message as string}
-          </span>
-        )}
-      </div>
-      <div className="mb-6">
-        <input
-          type="password"
-          {...register("password")}
-          placeholder="Password"
-          className={`${input_style} py-[15px]`}
-        />
-        {errors["password"] && (
-          <span className="text-red-500 text-xs pt-1 block">
-            {errors["password"]?.message as string}
-          </span>
-        )}
-      </div>
-      <button
-        type="submit"
-        style={{ backgroundColor: `${submitting ? "#ccc" : "#0F495E"}` }}
-        className="inline-block px-7 py-4 bg-[#0F495E] text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-        disabled={submitting}
-      >
-        {submitting ? "loading..." : "Sign In"}
-      </button>
-
-      <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-        <p className="text-center font-semibold mx-4 mb-0">OR</p>
-      </div>
-
-      <a
-        className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-        style={{ backgroundColor: "#3b5998" }}
-        onClick={() => signIn("google", { callbackUrl })}
-        role="button"
-      >
-        <Image
-          className="pr-2"
-          src="/images/google.svg"
-          alt=""
-          style={{ height: "2rem" }}
-          width={35}
-          height={35}
-        />
-        Continue with Google
-      </a>
-    </form>
+    <Card className="mx-auto w-[400px] max-w-sm">
+      <CardContent>
+        <form onSubmit={handleSubmit(onSubmitHandler)}>
+          <div className="grid gap-4 mt-8">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <input
+                type="email"
+                {...register("email")}
+                placeholder="Email address"
+                className={`${input_style} py-[10px]`}
+              />
+              {errors.email && (
+                <span className="text-red-500 text-xs pt-1 block">
+                  {errors.email?.message as string}
+                </span>
+              )}
+            </div>
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+                <Link
+                  href="#"
+                  className="ml-auto inline-block text-sm underline"
+                >
+                  Forgot your password?
+                </Link>
+              </div>
+              <input
+                type="password"
+                {...register("password")}
+                placeholder="Password"
+                className={`${input_style} py-[10px]`}
+              />
+              {errors.password && (
+                <span className="text-red-500 text-xs pt-1 block">
+                  {errors.password?.message as string}
+                </span>
+              )}
+            </div>
+            <Button
+              type="submit"
+              className="w-full bg-yellow-500 hover:bg-yellow-500/90"
+              disabled={submitting}
+            >
+              {submitting ? "Logging in..." : "Login"}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => signIn("google", { callbackUrl })}
+              className="w-full"
+              disabled={submitting}
+            >
+              Login with Google
+            </Button>
+          </div>
+        </form>
+        <div className="mt-4 text-center text-sm">
+          Don&apos;t have an account?{" "}
+          <Link href="/register" className="underline">
+            Sign up
+          </Link>
+        </div>
+      </CardContent>
+    </Card>
   );
 };

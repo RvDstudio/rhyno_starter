@@ -1,12 +1,9 @@
 import FrontBoxes from "@/components/FrontBoxes";
 import GridPattern from "@/components/GridPattern";
-import Header from "@/components/header";
-import Image from "next/image";
 
 export default function Home() {
   return (
     <>
-      <Header />
       <section className="relative overflow-hidden pt-32 pb-32 bg-white bg-hero bg-cover">
         <div className="px-12 mx-auto max-w-7xl">
           <div className="absolute -z-12 inset-0 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
@@ -30,7 +27,7 @@ export default function Home() {
             </p>
             <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
               <a
-                href="#_"
+                href="/dashboard"
                 className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-yellow-500 rounded-2xl sm:w-auto sm:mb-0"
               >
                 Get Started
@@ -48,8 +45,8 @@ export default function Home() {
                 </svg>
               </a>
               <a
-                href="#_"
-                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg bg-gray-100 rounded-2xl sm:w-auto sm:mb-0"
+                href="/sign-in"
+                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg bg-white rounded-2xl sm:w-auto sm:mb-0"
               >
                 Learn More
                 <svg
