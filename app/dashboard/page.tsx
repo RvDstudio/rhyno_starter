@@ -9,8 +9,8 @@ import {
 export default function Dashboard() {
   return (
     <>
-      <div className="bg-[#FAFAFA] dark:bg-[#171717] flex flex-1 flex-col p-4 lg:p-6">
-        <Breadcrumb>
+      <div className="pt-6 pl-10 pr-8 pb-10 bg-[#FAFAFA] dark:bg-[#171717] flex flex-1 flex-col p-4 lg:p-6">
+        <Breadcrumb className="pl-4">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>

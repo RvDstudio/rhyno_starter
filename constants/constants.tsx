@@ -1,6 +1,7 @@
 import {
   BellDot,
   BlocksIcon,
+  LayoutDashboard,
   Podcast,
   Scale,
   Settings,
@@ -18,6 +19,12 @@ interface MenuItem {
 }
 
 export const Menus: MenuItem[] = [
+  {
+    title: "Dashboard",
+    notification: 0,
+    icon: <LayoutDashboard className="w-5 h-5" />,
+    path: "/dashboard",
+  },
   {
     title: "Profile",
     notification: 0,

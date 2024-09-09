@@ -25,9 +25,9 @@ const Sidebar = () => {
     <div
       className={`${
         open ? "lg:w-72 md:w-64 hidden md:block" : "w-18 hidden md:block"
-      } bg-white text-gray-600 dark:bg-[#171717] border-r border-white dark:border-[#2e2e2e] p-4 pt-4 h-screen sticky top-0 duration-300 z-40`}
+      } bg-white text-gray-600 dark:bg-[#171717] border-r border-[#dddddd] dark:border-[#2e2e2e] p-4 pt-4 h-screen sticky top-0 duration-300 z-40`}
     >
-      <div className="flex gap-x-2 items-center border-b border-gray-200 dark:border-[#2e2e2e] pb-[18px]">
+      <div className="flex gap-x-2 items-center border-b border-gray-200 dark:border-[#2e2e2e] pb-[16px]">
         <Tractor
           strokeWidth={1}
           className={`text-white pl-1 dark:text-white cursor-pointer duration-500 h-8 w-8`}

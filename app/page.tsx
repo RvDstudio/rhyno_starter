@@ -14,7 +14,7 @@ export default function Home() {
           </div>
           <div className=" relative w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
             <h1 className="">
-              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-[120px]">
+              <span className="bg-gradient-to-r from-indigo-600 via-yellow-500 to-indigo-400 inline-block text-transparent bg-clip-text text-[120px]">
                 Rhyno Starter
               </span>{" "}
             </h1>
@@ -31,7 +31,7 @@ export default function Home() {
             <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
               <a
                 href="#_"
-                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0"
+                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-yellow-500 rounded-2xl sm:w-auto sm:mb-0"
               >
                 Get Started
                 <svg
