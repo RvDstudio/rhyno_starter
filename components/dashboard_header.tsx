@@ -24,16 +24,6 @@ export default function Header() {
         <MobileSidebar />
       </div>
 
-      <Link
-        href="#"
-        className="relative pl-4 flex items-center gap-2"
-        prefetch={false}
-      >
-        <span className="text-lg font-semibold hidden md:inline-block">
-          Dashboard
-        </span>
-      </Link>
-
       <div className="ml-auto flex items-center gap-4">
         <form className="flex-1 max-w-[150px]">
           <div className="relative">

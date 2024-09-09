@@ -99,7 +99,7 @@ const Sidebar = () => {
         >
           <AudioWaveform className="text-[#f6ca09] w-8 h-8" />
           <div className={`${!open && "hidden"} text-sm`}>
-            <h2 className="text-[#bababa] font-bold">Reinier Varkevisser</h2>
+            <h2 className="text-gray-700 font-bold">Reinier Varkevisser</h2>
             <p className="text-[#f6ca09] text-[12px] font-bold">
               developer / Admin
             </p>
