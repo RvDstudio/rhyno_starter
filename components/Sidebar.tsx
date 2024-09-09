@@ -1,10 +1,5 @@
 "use client";
-import {
-  ArrowLeftSquareIcon,
-  Tractor,
-  Milk,
-  AudioWaveform,
-} from "lucide-react";
+import { Tractor, AudioWaveform, Component } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menus } from "../constants/constants";
@@ -28,12 +23,12 @@ const Sidebar = () => {
       } bg-white text-gray-600 dark:bg-[#171717] border-r border-[#dddddd] dark:border-[#2e2e2e] p-4 pt-4 h-screen sticky top-0 duration-300 z-40`}
     >
       <div className="flex gap-x-2 items-center border-b border-gray-200 dark:border-[#2e2e2e] pb-[16px]">
-        <Tractor
-          strokeWidth={1}
-          className={`text-white pl-1 dark:text-white cursor-pointer duration-500 h-8 w-8`}
+        <Component
+          strokeWidth={1.5}
+          className={`text-gray-700 pl-1 cursor-pointer duration-500 h-8 w-8`}
         />
         <h1
-          className={`text-gray-600 dark:text-white origin-left font-medium text-2xl duration-200 ${
+          className={`text-gray-700 dark:text-white origin-left font-medium text-2xl duration-200 ${
             !open && "scale-0 hidden"
           }`}
         >
