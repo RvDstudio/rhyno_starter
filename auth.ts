@@ -1,3 +1,4 @@
+// auth.ts
 import NextAuth from "next-auth";
 import github from "next-auth/providers/github";
 import google from "next-auth/providers/google";
@@ -14,7 +15,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   providers: [
     github({ allowDangerousEmailAccountLinking: true }),
-    google({ allowDangerousEmailAccountLinking: true }),
+    google({
+      allowDangerousEmailAccountLinking: true,
+      profile(profile) {
+        return {
+          id: profile.id,
+          email: profile.email,
+          name: profile.name,
+          image: profile.picture,
+
+        };
+      },
+    }),
     CredentialsProvider({
       name: "Sign in",
       id: "credentials",
@@ -46,7 +58,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           id: user.id,
           email: user.email,
           name: user.name,
-          randomKey: "Hey cool",
+          isAdmin: user.isAdmin, // Assuming this field exists in your database
         };
       },
     }),
@@ -66,24 +78,36 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return true;
     },
-    jwt: ({ token, user }) => {
+    jwt: async ({ token, user }) => {
       if (user) {
         const u = user as unknown as any;
         return {
           ...token,
           id: u.id,
           randomKey: u.randomKey,
+          isAdmin: u.isAdmin, // Add isAdmin to the token
         };
+      }
+
+      // Fetch user details if coming from Google
+      if (token.email) {
+        const userFromDb = await db.query.users.findFirst({
+          where: (users, { eq }) => eq(users.email, token.email as string),
+        });
+        if (userFromDb) {
+          token.isAdmin = userFromDb.isAdmin; // Set isAdmin from the database
+        }
       }
       return token;
     },
-    session(params) {
+    session: async ({ session, token }) => {
       return {
-        ...params.session,
+        ...session,
         user: {
-          ...params.session.user,
-          id: params.token.id as string,
-          randomKey: params.token.randomKey,
+          ...session.user,
+          id: token.id as string,
+          randomKey: token.randomKey,
+          isAdmin: token.isAdmin, // Add isAdmin to the session
         },
       };
     },

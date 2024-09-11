@@ -15,6 +15,8 @@ export const users = pgTable('user', {
   password: text('password'),
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
+  isAdmin: integer('isAdmin').default(0), // Ensure this field exists in your schema
+  role: text('role'), // New field for role
 });
 
 export const accounts = pgTable(
@@ -22,7 +24,7 @@ export const accounts = pgTable(
   {
     userId: uuid('userId')
       .notNull()
-      .references(() => users.id, { onDelete: 'cascade' }),
+      .references(() => users.id, { onDelete: 'cascade' }), // Foreign key reference to User
     type: text('type').$type<AdapterAccount['type']>().notNull(),
     provider: text('provider').notNull(),
     providerAccountId: text('providerAccountId').notNull(),
@@ -45,7 +47,7 @@ export const sessions = pgTable('session', {
   sessionToken: text('sessionToken').notNull().primaryKey(),
   userId: uuid('userId')
     .notNull()
-    .references(() => users.id, { onDelete: 'cascade' }),
+    .references(() => users.id, { onDelete: 'cascade' }), // Foreign key reference to User
   expires: timestamp('expires', { mode: 'date' }).notNull(),
 });
 
@@ -60,3 +62,15 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+export const products = pgTable("products", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  user_id: text("user_id").notNull(), // Reference to the user
+  product_name: text("product_name").notNull(),
+  description: text("description").notNull(),
+  short_description: text("short_description").notNull(),
+  quantity: text("quantity").notNull(),
+  price: text("price").notNull(),
+  image_url: text("image_url").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});

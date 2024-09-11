@@ -13,6 +13,18 @@ CREATE TABLE IF NOT EXISTS "account" (
 	CONSTRAINT "account_provider_providerAccountId_pk" PRIMARY KEY("provider","providerAccountId")
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "products" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"user_id" text NOT NULL,
+	"product_name" text NOT NULL,
+	"description" text NOT NULL,
+	"short_description" text NOT NULL,
+	"quantity" text NOT NULL,
+	"price" text NOT NULL,
+	"image_url" text NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "session" (
 	"sessionToken" text PRIMARY KEY NOT NULL,
 	"userId" uuid NOT NULL,
@@ -25,7 +37,10 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"email" text NOT NULL,
 	"password" text,
 	"emailVerified" timestamp,
-	"image" text
+	"image" text,
+	"isAdmin" integer DEFAULT 0,
+	"role" text,
+	CONSTRAINT "user_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "verificationToken" (
