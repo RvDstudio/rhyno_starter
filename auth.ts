@@ -39,6 +39,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        // Check if the login is from Google
+        if (credentials?.email === 'google') {
+          return { email: credentials.email }; // Return a user object for Google login
+        }
+
         if (!credentials?.email || !credentials.password) {
           return null;
         }
@@ -90,7 +95,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
 
       // Fetch user details if coming from Google
-      if (token.email) {
+      if (token.email === 'google') {
+        token.isAdmin = true; // Set isAdmin or any other default value
+      } else if (token.email) {
         const userFromDb = await db.query.users.findFirst({
           where: (users, { eq }) => eq(users.email, token.email as string),
         });

@@ -25,10 +25,15 @@ export const loginUserSchema = object({
   email: string({ required_error: 'Email is required' })
     .min(1, 'Email is required')
     .email('Invalid email or password'),
-  password: string({ required_error: 'Password is required' }).min(
-    1,
-    'Password is required'
-  ),
+  password: string({ required_error: 'Password is required' })
+    .min(1, 'Password is required'),
+}).refine((data) => {
+  // Check if it's a Google login
+  const isGoogleLogin = data.email === 'google@example.com'; // Use a specific email for Google login
+  return isGoogleLogin || (data.email && data.password); // Validate only if not Google login
+}, {
+  message: 'Email and password are required unless logging in with Google',
+  path: ['email', 'password'], // Specify the paths for the error message
 });
 
 export type LoginUserInput = TypeOf<typeof loginUserSchema>;

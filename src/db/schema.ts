@@ -5,6 +5,9 @@ import {
   primaryKey,
   integer,
   uuid,
+  boolean,
+  serial,
+  varchar,
 } from 'drizzle-orm/pg-core';
 import type { AdapterAccount } from 'next-auth/adapters';
 
@@ -73,4 +76,56 @@ export const products = pgTable("products", {
   price: text("price").notNull(),
   image_url: text("image_url").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const caseSpecs = pgTable('case_specs', {
+  id: serial('id').primaryKey(),
+  // Form Factors
+  formFactorMiniItx: boolean('form_factor_mini_itx'),
+  formFactorFlexAtx: boolean('form_factor_flex_atx'),
+  formFactorMiniAtx: boolean('form_factor_mini_atx'),
+  formFactorMicroAtx: boolean('form_factor_micro_atx'),
+  formFactorAtx: boolean('form_factor_atx'),
+  formFactorEAtx: boolean('form_factor_e_atx'),
+  formFactorXlAtx: boolean('form_factor_xl_atx'),
+  // Front I/O Ports
+  frontIoPower: boolean('front_io_power'),
+  frontIoReset: boolean('front_io_reset'),
+  frontIoUsb2_0: boolean('front_io_usb_2_0'),
+  frontIoUsb3_2Gen1a: boolean('front_io_usb_3_2_gen1a'),
+  frontIoUsb3_2Gen2a: boolean('front_io_usb_3_2_gen2a'),
+  frontIoUsb3_2Gen2x2a: boolean('front_io_usb_3_2_gen2x2a'),
+  frontIoUsb3_2Gen2c: boolean('front_io_usb_3_2_gen2c'),
+  frontIoUsb4_20gbTypeC: boolean('front_io_usb_4_20gb_type_c'),
+  frontIoUsb4_40gbTypeC: boolean('front_io_usb_4_40gb_type_c'),
+  frontIoAudioJack: boolean('front_io_audio_jack'),
+  // Dimensions
+  dimensionsLengthMm: integer('dimensions_length_mm'),
+  dimensionsWidthMm: integer('dimensions_width_mm'),
+  dimensionsHeightMm: integer('dimensions_height_mm'),
+  // Fan Capacity
+  fanCapacity120mm: boolean('fan_capacity_120mm'),
+  fanCapacity140mm: boolean('fan_capacity_140mm'),
+  // Water Cooling Mounts
+  waterCoolingFront: boolean('water_cooling_front'),
+  waterCoolingTop: boolean('water_cooling_top'),
+  waterCoolingBottom: boolean('water_cooling_bottom'),
+  waterCoolingRear: boolean('water_cooling_rear'),
+  // Housing Material
+  housingMaterialPlastic: boolean('housing_material_plastic'),
+  housingMaterialMetal: boolean('housing_material_metal'),
+  housingMaterialSidePanel: varchar('housing_material_side_panel', [255]), 
+  housingMaterialFrontPanel: varchar('housing_material_front_panel', [255]), 
+  // PSU Placement
+  psuPlacementTop: boolean('psu_placement_top'),
+  psuPlacementBottom: boolean('psu_placement_bottom'),
+  // Cable Routing
+  cableRoutingYes: boolean('cable_routing_yes'),
+  cableRoutingNo: boolean('cable_routing_no'),
+  // Storage Options
+  storageOptionsHdd35: boolean('storage_options_hdd_35'),
+  storageOptionsSsd25: boolean('storage_options_ssd_25'),
+  // Cooler and GPU Size
+  maxCoolerHeightMm: integer('max_cooler_height_mm'),
+  maxGpuSizeLengthMm: integer('max_gpu_size_length_mm'),
 });
