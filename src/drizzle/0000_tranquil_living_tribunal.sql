@@ -13,48 +13,6 @@ CREATE TABLE IF NOT EXISTS "account" (
 	CONSTRAINT "account_provider_providerAccountId_pk" PRIMARY KEY("provider","providerAccountId")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "case_specs" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"form_factor_mini_itx" boolean,
-	"form_factor_flex_atx" boolean,
-	"form_factor_mini_atx" boolean,
-	"form_factor_micro_atx" boolean,
-	"form_factor_atx" boolean,
-	"form_factor_e_atx" boolean,
-	"form_factor_xl_atx" boolean,
-	"front_io_power" boolean,
-	"front_io_reset" boolean,
-	"front_io_usb_2_0" boolean,
-	"front_io_usb_3_2_gen1a" boolean,
-	"front_io_usb_3_2_gen2a" boolean,
-	"front_io_usb_3_2_gen2x2a" boolean,
-	"front_io_usb_3_2_gen2c" boolean,
-	"front_io_usb_4_20gb_type_c" boolean,
-	"front_io_usb_4_40gb_type_c" boolean,
-	"front_io_audio_jack" boolean,
-	"dimensions_length_mm" integer,
-	"dimensions_width_mm" integer,
-	"dimensions_height_mm" integer,
-	"fan_capacity_120mm" boolean,
-	"fan_capacity_140mm" boolean,
-	"water_cooling_front" boolean,
-	"water_cooling_top" boolean,
-	"water_cooling_bottom" boolean,
-	"water_cooling_rear" boolean,
-	"housing_material_plastic" boolean,
-	"housing_material_metal" boolean,
-	"housing_material_side_panel" varchar(1),
-	"housing_material_front_panel" varchar(1),
-	"psu_placement_top" boolean,
-	"psu_placement_bottom" boolean,
-	"cable_routing_yes" boolean,
-	"cable_routing_no" boolean,
-	"storage_options_hdd_35" boolean,
-	"storage_options_ssd_25" boolean,
-	"max_cooler_height_mm" integer,
-	"max_gpu_size_length_mm" integer
-);
---> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "products" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"user_id" text NOT NULL,

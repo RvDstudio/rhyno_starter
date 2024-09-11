@@ -1,11 +1,5 @@
 "use client";
-import {
-  ArrowLeftSquareIcon,
-  Tractor,
-  Milk,
-  Component,
-  AudioWaveform,
-} from "lucide-react";
+import { Component, AudioWaveform } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menus } from "../constants/constants";
