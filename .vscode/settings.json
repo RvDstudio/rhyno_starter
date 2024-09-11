@@ -6,6 +6,7 @@
     "Amet",
     "Camperplekken",
     "cing",
+    "clsx",
     "consequat",
     "deserunt",
     "devdojo",
@@ -17,12 +18,16 @@
     "googleusercontent",
     "incididunt",
     "informations",
+    "instock",
+    "Kaas",
     "Kanban",
     "labore",
     "mollit",
+    "neondatabase",
     "Nextauth",
     "Nextjs",
     "officia",
+    "outofstock",
     "Producten",
     "Profiel",
     "shadcn",
@@ -30,6 +35,8 @@
     "sint",
     "tempor",
     "ullamco",
-    "Velit"
+    "Velit",
+    "Vlees",
+    "Zuivel"
   ]
 }

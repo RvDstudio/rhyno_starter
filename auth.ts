@@ -5,7 +5,7 @@ import google from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { db } from "./database";
+import { db } from "./src/db";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "jwt" },
