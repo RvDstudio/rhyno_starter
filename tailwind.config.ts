@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
   	extend: {
 			backgroundImage: {
-				'hero': "url('../public/images/bg.png')",
+				//'hero': "'./src/app/**/*.{js,ts,jsx,tsx,mdx}',",
 			},
   		colors: {
   			'ct-dark-600': '#222',
@@ -96,6 +96,9 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+		require("tailwindcss-animate"),
+		require("tailwind-scrollbar-hide")
+	],
 };
 export default config;

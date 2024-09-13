@@ -52,7 +52,7 @@ export const Menus: MenuItem[] = [
   {
     title: "Camperplekken",
     icon: <Caravan className="w-5 h-5" />,
-    gap: false,
+    gap: true,
     notification: 0,
     path: "/loyalty-cards",
   },

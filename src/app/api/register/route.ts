@@ -1,6 +1,6 @@
 import { hash } from 'bcryptjs';
 import { NextResponse } from 'next/server';
-import { createUserSchema } from '@/src/lib/user-schema';
+import { createUserSchema } from '@/lib/user-schema';
 import { ZodError } from 'zod';
 import { users } from '@/src/db/schema';
 import { db } from '@/src/db';

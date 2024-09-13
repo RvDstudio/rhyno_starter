@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { CreateUserInput, createUserSchema } from "@/src/lib/user-schema";
+import { CreateUserInput, createUserSchema } from "@/lib/user-schema";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent } from "@/src/components/ui/card";
 import { Label } from "@/src/components/ui/label";
