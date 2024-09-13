@@ -1,5 +1,5 @@
 {
-  "id": "fccbda47-1f6d-4711-8117-3898f5711c4b",
+  "id": "5a06d33d-dbf9-4b18-9959-bb6496a9c513",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -100,6 +100,380 @@
           ]
         }
       },
+      "uniqueConstraints": {}
+    },
+    "case_specs": {
+      "name": "case_specs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "form_factor_mini_itx": {
+          "name": "form_factor_mini_itx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_flex_atx": {
+          "name": "form_factor_flex_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_mini_atx": {
+          "name": "form_factor_mini_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_micro_atx": {
+          "name": "form_factor_micro_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_atx": {
+          "name": "form_factor_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_e_atx": {
+          "name": "form_factor_e_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_xl_atx": {
+          "name": "form_factor_xl_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_power": {
+          "name": "front_io_power",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_reset": {
+          "name": "front_io_reset",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_2_0": {
+          "name": "front_io_usb_2_0",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_3_2_gen1a": {
+          "name": "front_io_usb_3_2_gen1a",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_3_2_gen2a": {
+          "name": "front_io_usb_3_2_gen2a",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_3_2_gen2x2a": {
+          "name": "front_io_usb_3_2_gen2x2a",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_3_2_gen2c": {
+          "name": "front_io_usb_3_2_gen2c",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_4_20gb_type_c": {
+          "name": "front_io_usb_4_20gb_type_c",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_4_40gb_type_c": {
+          "name": "front_io_usb_4_40gb_type_c",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_audio_jack": {
+          "name": "front_io_audio_jack",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dimensions_length_mm": {
+          "name": "dimensions_length_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dimensions_width_mm": {
+          "name": "dimensions_width_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dimensions_height_mm": {
+          "name": "dimensions_height_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fan_capacity_120mm": {
+          "name": "fan_capacity_120mm",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fan_capacity_140mm": {
+          "name": "fan_capacity_140mm",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "water_cooling_front": {
+          "name": "water_cooling_front",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "water_cooling_top": {
+          "name": "water_cooling_top",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "water_cooling_bottom": {
+          "name": "water_cooling_bottom",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "water_cooling_rear": {
+          "name": "water_cooling_rear",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "housing_material_plastic": {
+          "name": "housing_material_plastic",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "housing_material_metal": {
+          "name": "housing_material_metal",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "housing_material_side_panel": {
+          "name": "housing_material_side_panel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "housing_material_front_panel": {
+          "name": "housing_material_front_panel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "psu_placement_top": {
+          "name": "psu_placement_top",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "psu_placement_bottom": {
+          "name": "psu_placement_bottom",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cable_routing_yes": {
+          "name": "cable_routing_yes",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cable_routing_no": {
+          "name": "cable_routing_no",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "storage_options_hdd_35": {
+          "name": "storage_options_hdd_35",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "storage_options_ssd_25": {
+          "name": "storage_options_ssd_25",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_cooler_height_mm": {
+          "name": "max_cooler_height_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_gpu_size_length_mm": {
+          "name": "max_gpu_size_length_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "intel_cpu": {
+      "name": "intel_cpu",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "processor": {
+          "name": "processor",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "model": {
+          "name": "model",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "code_name": {
+          "name": "code_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "generation": {
+          "name": "generation",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "performance_cores": {
+          "name": "performance_cores",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "efficient_cores": {
+          "name": "efficient_cores",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "threads": {
+          "name": "threads",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "base_clock_performance_core": {
+          "name": "base_clock_performance_core",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "turbo_clock_performance_core": {
+          "name": "turbo_clock_performance_core",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "turbo_clock_efficient_core": {
+          "name": "turbo_clock_efficient_core",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "base_clock_efficient_core": {
+          "name": "base_clock_efficient_core",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gpu": {
+          "name": "gpu",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_clock_rate_ghz": {
+          "name": "max_clock_rate_ghz",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "l2_cache": {
+          "name": "l2_cache",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "smart_cache": {
+          "name": "smart_cache",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "base_tdp_w": {
+          "name": "base_tdp_w",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "turbo_tdp_w": {
+          "name": "turbo_tdp_w",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "socket": {
+          "name": "socket",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "launch_date": {
+          "name": "launch_date",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
     "products": {
@@ -253,6 +627,13 @@
         },
         "isAdmin": {
           "name": "isAdmin",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "isModerator": {
+          "name": "isModerator",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,

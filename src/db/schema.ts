@@ -21,6 +21,7 @@ export const users = pgTable('user', {
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
   isAdmin: integer('isAdmin').default(0), // Ensure this field exists in your schema
+  isModerator: integer('isModerator').default(0), // Ensure this field exists in your schema
   role: text('role'), // New field for role
 });
 
