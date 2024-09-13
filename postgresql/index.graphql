@@ -1,0 +1,832 @@
+type Account {
+  access_token: String
+  expires_at: Int
+  id_token: String
+  provider: String!
+  providerAccountId: String!
+  refresh_token: String
+  scope: String
+  session_state: String
+  token_type: String
+  type: String!
+  user: User @materializer(query: "userUsingAccount_userId_user_id_fk")
+  userId: ID!
+}
+
+type Case_specs {
+  cable_routing_no: Boolean
+  cable_routing_yes: Boolean
+  dimensions_height_mm: Int
+  dimensions_length_mm: Int
+  dimensions_width_mm: Int
+  fan_capacity_120mm: Boolean
+  fan_capacity_140mm: Boolean
+  form_factor_atx: Boolean
+  form_factor_e_atx: Boolean
+  form_factor_flex_atx: Boolean
+  form_factor_micro_atx: Boolean
+  form_factor_mini_atx: Boolean
+  form_factor_mini_itx: Boolean
+  form_factor_xl_atx: Boolean
+  front_io_audio_jack: Boolean
+  front_io_power: Boolean
+  front_io_reset: Boolean
+  front_io_usb_2_0: Boolean
+  front_io_usb_3_2_gen1a: Boolean
+  front_io_usb_3_2_gen2a: Boolean
+  front_io_usb_3_2_gen2c: Boolean
+  front_io_usb_3_2_gen2x2a: Boolean
+  front_io_usb_4_20gb_type_c: Boolean
+  front_io_usb_4_40gb_type_c: Boolean
+  housing_material_front_panel: String!
+  housing_material_metal: Boolean
+  housing_material_plastic: Boolean
+  housing_material_side_panel: String!
+  id: Int!
+  max_cooler_height_mm: Int
+  max_gpu_size_length_mm: Int
+  psu_placement_bottom: Boolean
+  psu_placement_top: Boolean
+  storage_options_hdd_35: Boolean
+  storage_options_ssd_25: Boolean
+  water_cooling_bottom: Boolean
+  water_cooling_front: Boolean
+  water_cooling_rear: Boolean
+  water_cooling_top: Boolean
+}
+
+type Intel_cpu {
+  base_clock_efficient_core: Float
+  base_clock_performance_core: Float
+  base_tdp_w: Int
+  code_name: String
+  efficient_cores: Int
+  generation: Int
+  gpu: String
+  id: Int!
+  l2_cache: String
+  launch_date: String
+  max_clock_rate_ghz: Float
+  model: String
+  performance_cores: Int
+  processor: String
+  smart_cache: String
+  socket: String
+  threads: Int
+  turbo_clock_efficient_core: Float
+  turbo_clock_performance_core: Float
+  turbo_tdp_w: Int
+}
+
+type Products {
+  created_at: DateTime!
+  description: String!
+  id: ID!
+  image_url: String!
+  price: String!
+  product_name: String!
+  quantity: String!
+  short_description: String!
+  user_id: String!
+}
+
+type Session {
+  expires: DateTime!
+  sessionToken: String!
+  user: User @materializer(query: "userUsingSession_userId_user_id_fk")
+  userId: ID!
+}
+
+type User {
+  account: [Account]
+    @materializer(query: "accountUsingAccount_userId_user_id_fk")
+  email: String!
+  emailVerified: DateTime
+  id: ID!
+  image: String
+  isAdmin: Int
+  name: String
+  password: String
+  role: String
+  session: [Session]
+    @materializer(query: "sessionUsingSession_userId_user_id_fk")
+}
+
+type VerificationToken {
+  expires: DateTime!
+  identifier: String!
+  token: String!
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Account' "
+  account(provider: String!, providerAccountId: String!): Account
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "account"
+      configuration: "postgresql_config"
+    )
+  accountList: [Account]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "account"
+      configuration: "postgresql_config"
+    )
+  accountPaginatedList(first: Int, after: Int): [Account]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "access_token", "expires_at", "id_token", "provider", "providerAccountId", "refresh_token", "scope", "session_state", "token_type", "type", "userId" FROM "account" ORDER BY "provider", "providerAccountId" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  accountUsingAccount_userId_user_id_fk(id: ID!): [Account]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "access_token", "expires_at", "id_token", "provider", "providerAccountId", "refresh_token", "scope", "session_state", "token_type", "type", "userId" FROM "account" WHERE "userId" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Case_specs' "
+  case_specs(id: Int!): Case_specs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "case_specs"
+      configuration: "postgresql_config"
+    )
+  case_specsList: [Case_specs]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "case_specs"
+      configuration: "postgresql_config"
+    )
+  case_specsPaginatedList(first: Int, after: Int): [Case_specs]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cable_routing_no", "cable_routing_yes", "dimensions_height_mm", "dimensions_length_mm", "dimensions_width_mm", "fan_capacity_120mm", "fan_capacity_140mm", "form_factor_atx", "form_factor_e_atx", "form_factor_flex_atx", "form_factor_micro_atx", "form_factor_mini_atx", "form_factor_mini_itx", "form_factor_xl_atx", "front_io_audio_jack", "front_io_power", "front_io_reset", "front_io_usb_2_0", "front_io_usb_3_2_gen1a", "front_io_usb_3_2_gen2a", "front_io_usb_3_2_gen2c", "front_io_usb_3_2_gen2x2a", "front_io_usb_4_20gb_type_c", "front_io_usb_4_40gb_type_c", "housing_material_front_panel", "housing_material_metal", "housing_material_plastic", "housing_material_side_panel", "id", "max_cooler_height_mm", "max_gpu_size_length_mm", "psu_placement_bottom", "psu_placement_top", "storage_options_hdd_35", "storage_options_ssd_25", "water_cooling_bottom", "water_cooling_front", "water_cooling_rear", "water_cooling_top" FROM "case_specs" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Intel_cpu' "
+  intel_cpu(id: Int!): Intel_cpu
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "intel_cpu"
+      configuration: "postgresql_config"
+    )
+  intel_cpuList: [Intel_cpu]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "intel_cpu"
+      configuration: "postgresql_config"
+    )
+  intel_cpuPaginatedList(first: Int, after: Int): [Intel_cpu]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "base_clock_efficient_core", "base_clock_performance_core", "base_tdp_w", "code_name", "efficient_cores", "generation", "gpu", "id", "l2_cache", "launch_date", "max_clock_rate_ghz", "model", "performance_cores", "processor", "smart_cache", "socket", "threads", "turbo_clock_efficient_core", "turbo_clock_performance_core", "turbo_tdp_w" FROM "intel_cpu" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Products' "
+  products(id: ID!): Products
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "products"
+      configuration: "postgresql_config"
+    )
+  productsList: [Products]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "products"
+      configuration: "postgresql_config"
+    )
+  productsPaginatedList(first: Int, after: Int): [Products]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "created_at", "description", "id", "image_url", "price", "product_name", "quantity", "short_description", "user_id" FROM "products" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Session' "
+  session(sessionToken: String!): Session
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "session"
+      configuration: "postgresql_config"
+    )
+  sessionList: [Session]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "session"
+      configuration: "postgresql_config"
+    )
+  sessionPaginatedList(first: Int, after: Int): [Session]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "expires", "sessionToken", "userId" FROM "session" ORDER BY "sessionToken" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  sessionUsingSession_userId_user_id_fk(id: ID!): [Session]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "expires", "sessionToken", "userId" FROM "session" WHERE "userId" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'User' "
+  user(id: ID!): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "user"
+      configuration: "postgresql_config"
+    )
+  userList: [User]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "user"
+      configuration: "postgresql_config"
+    )
+  userPaginatedList(first: Int, after: Int): [User]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "email", "emailVerified", "id", "image", "isAdmin", "name", "password", "role" FROM "user" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  userUsingAccount_userId_user_id_fk(userId: ID!): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "email", "emailVerified", "id", "image", "isAdmin", "name", "password", "role" FROM "user" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  userUsingSession_userId_user_id_fk(userId: ID!): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "email", "emailVerified", "id", "image", "isAdmin", "name", "password", "role" FROM "user" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  userUsinguser_email_unique(email: String!): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "email", "emailVerified", "id", "image", "isAdmin", "name", "password", "role" FROM "user" WHERE "email" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'VerificationToken' "
+  verificationToken(identifier: String!, token: String!): VerificationToken
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "verificationToken"
+      configuration: "postgresql_config"
+    )
+  verificationTokenList: [VerificationToken]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "verificationToken"
+      configuration: "postgresql_config"
+    )
+  verificationTokenPaginatedList(first: Int, after: Int): [VerificationToken]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "expires", "identifier", "token" FROM "verificationToken" ORDER BY "identifier", "token" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Account' "
+  deleteAccount(provider: String!, providerAccountId: String!): Account
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "account"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertAccount(
+    id_token: String
+    provider: String!
+    token_type: String
+    expires_at: Int
+    access_token: String
+    providerAccountId: String!
+    scope: String
+    refresh_token: String
+    userId: ID!
+    type: String!
+    session_state: String
+  ): Account
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "account"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateAccount(
+    provider: String!
+    providerAccountId: String!
+    access_token: String
+    expires_at: Int
+    id_token: String
+    refresh_token: String
+    scope: String
+    session_state: String
+    token_type: String
+    type: String
+    userId: ID
+  ): Account
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "account" SET
+        "access_token" = COALESCE($3, "access_token"),
+        "expires_at" = COALESCE($4, "expires_at"),
+        "id_token" = COALESCE($5, "id_token"),
+        "refresh_token" = COALESCE($6, "refresh_token"),
+        "scope" = COALESCE($7, "scope"),
+        "session_state" = COALESCE($8, "session_state"),
+        "token_type" = COALESCE($9, "token_type"),
+        "type" = COALESCE($10, "type"),
+        "userId" = COALESCE($11, "userId")
+      WHERE
+        "provider" = $1 AND
+        "providerAccountId" = $2
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Case_specs' "
+  deleteCase_specs(id: Int!): Case_specs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "case_specs"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCase_specs(
+    max_cooler_height_mm: Int
+    housing_material_metal: Boolean
+    water_cooling_top: Boolean
+    housing_material_plastic: Boolean
+    front_io_audio_jack: Boolean
+    front_io_usb_4_40gb_type_c: Boolean
+    water_cooling_rear: Boolean
+    cable_routing_yes: Boolean
+    housing_material_front_panel: String!
+    form_factor_xl_atx: Boolean
+    storage_options_ssd_25: Boolean
+    water_cooling_bottom: Boolean
+    form_factor_micro_atx: Boolean
+    front_io_usb_3_2_gen2c: Boolean
+    fan_capacity_120mm: Boolean
+    front_io_usb_2_0: Boolean
+    psu_placement_top: Boolean
+    water_cooling_front: Boolean
+    storage_options_hdd_35: Boolean
+    form_factor_flex_atx: Boolean
+    form_factor_atx: Boolean
+    dimensions_length_mm: Int
+    front_io_usb_3_2_gen1a: Boolean
+    form_factor_mini_atx: Boolean
+    max_gpu_size_length_mm: Int
+    front_io_usb_3_2_gen2x2a: Boolean
+    form_factor_e_atx: Boolean
+    front_io_power: Boolean
+    psu_placement_bottom: Boolean
+    dimensions_height_mm: Int
+    form_factor_mini_itx: Boolean
+    front_io_usb_3_2_gen2a: Boolean
+    front_io_reset: Boolean
+    front_io_usb_4_20gb_type_c: Boolean
+    dimensions_width_mm: Int
+    fan_capacity_140mm: Boolean
+    cable_routing_no: Boolean
+    housing_material_side_panel: String!
+  ): Case_specs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "case_specs"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCase_specs(
+    id: Int!
+    cable_routing_no: Boolean
+    cable_routing_yes: Boolean
+    dimensions_height_mm: Int
+    dimensions_length_mm: Int
+    dimensions_width_mm: Int
+    fan_capacity_120mm: Boolean
+    fan_capacity_140mm: Boolean
+    form_factor_atx: Boolean
+    form_factor_e_atx: Boolean
+    form_factor_flex_atx: Boolean
+    form_factor_micro_atx: Boolean
+    form_factor_mini_atx: Boolean
+    form_factor_mini_itx: Boolean
+    form_factor_xl_atx: Boolean
+    front_io_audio_jack: Boolean
+    front_io_power: Boolean
+    front_io_reset: Boolean
+    front_io_usb_2_0: Boolean
+    front_io_usb_3_2_gen1a: Boolean
+    front_io_usb_3_2_gen2a: Boolean
+    front_io_usb_3_2_gen2c: Boolean
+    front_io_usb_3_2_gen2x2a: Boolean
+    front_io_usb_4_20gb_type_c: Boolean
+    front_io_usb_4_40gb_type_c: Boolean
+    housing_material_front_panel: String
+    housing_material_metal: Boolean
+    housing_material_plastic: Boolean
+    housing_material_side_panel: String
+    max_cooler_height_mm: Int
+    max_gpu_size_length_mm: Int
+    psu_placement_bottom: Boolean
+    psu_placement_top: Boolean
+    storage_options_hdd_35: Boolean
+    storage_options_ssd_25: Boolean
+    water_cooling_bottom: Boolean
+    water_cooling_front: Boolean
+    water_cooling_rear: Boolean
+    water_cooling_top: Boolean
+  ): Case_specs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "case_specs" SET
+        "cable_routing_no" = COALESCE($2, "cable_routing_no"),
+        "cable_routing_yes" = COALESCE($3, "cable_routing_yes"),
+        "dimensions_height_mm" = COALESCE($4, "dimensions_height_mm"),
+        "dimensions_length_mm" = COALESCE($5, "dimensions_length_mm"),
+        "dimensions_width_mm" = COALESCE($6, "dimensions_width_mm"),
+        "fan_capacity_120mm" = COALESCE($7, "fan_capacity_120mm"),
+        "fan_capacity_140mm" = COALESCE($8, "fan_capacity_140mm"),
+        "form_factor_atx" = COALESCE($9, "form_factor_atx"),
+        "form_factor_e_atx" = COALESCE($10, "form_factor_e_atx"),
+        "form_factor_flex_atx" = COALESCE($11, "form_factor_flex_atx"),
+        "form_factor_micro_atx" = COALESCE($12, "form_factor_micro_atx"),
+        "form_factor_mini_atx" = COALESCE($13, "form_factor_mini_atx"),
+        "form_factor_mini_itx" = COALESCE($14, "form_factor_mini_itx"),
+        "form_factor_xl_atx" = COALESCE($15, "form_factor_xl_atx"),
+        "front_io_audio_jack" = COALESCE($16, "front_io_audio_jack"),
+        "front_io_power" = COALESCE($17, "front_io_power"),
+        "front_io_reset" = COALESCE($18, "front_io_reset"),
+        "front_io_usb_2_0" = COALESCE($19, "front_io_usb_2_0"),
+        "front_io_usb_3_2_gen1a" = COALESCE($20, "front_io_usb_3_2_gen1a"),
+        "front_io_usb_3_2_gen2a" = COALESCE($21, "front_io_usb_3_2_gen2a"),
+        "front_io_usb_3_2_gen2c" = COALESCE($22, "front_io_usb_3_2_gen2c"),
+        "front_io_usb_3_2_gen2x2a" = COALESCE($23, "front_io_usb_3_2_gen2x2a"),
+        "front_io_usb_4_20gb_type_c" = COALESCE($24, "front_io_usb_4_20gb_type_c"),
+        "front_io_usb_4_40gb_type_c" = COALESCE($25, "front_io_usb_4_40gb_type_c"),
+        "housing_material_front_panel" = COALESCE($26, "housing_material_front_panel"),
+        "housing_material_metal" = COALESCE($27, "housing_material_metal"),
+        "housing_material_plastic" = COALESCE($28, "housing_material_plastic"),
+        "housing_material_side_panel" = COALESCE($29, "housing_material_side_panel"),
+        "max_cooler_height_mm" = COALESCE($30, "max_cooler_height_mm"),
+        "max_gpu_size_length_mm" = COALESCE($31, "max_gpu_size_length_mm"),
+        "psu_placement_bottom" = COALESCE($32, "psu_placement_bottom"),
+        "psu_placement_top" = COALESCE($33, "psu_placement_top"),
+        "storage_options_hdd_35" = COALESCE($34, "storage_options_hdd_35"),
+        "storage_options_ssd_25" = COALESCE($35, "storage_options_ssd_25"),
+        "water_cooling_bottom" = COALESCE($36, "water_cooling_bottom"),
+        "water_cooling_front" = COALESCE($37, "water_cooling_front"),
+        "water_cooling_rear" = COALESCE($38, "water_cooling_rear"),
+        "water_cooling_top" = COALESCE($39, "water_cooling_top")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Intel_cpu' "
+  deleteIntel_cpu(id: Int!): Intel_cpu
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "intel_cpu"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertIntel_cpu(
+    socket: String
+    gpu: String
+    generation: Int
+    launch_date: String
+    base_clock_performance_core: Float
+    efficient_cores: Int
+    processor: String
+    turbo_tdp_w: Int
+    base_tdp_w: Int
+    max_clock_rate_ghz: Float
+    code_name: String
+    model: String
+    turbo_clock_efficient_core: Float
+    base_clock_efficient_core: Float
+    l2_cache: String
+    performance_cores: Int
+    smart_cache: String
+    turbo_clock_performance_core: Float
+    threads: Int
+  ): Intel_cpu
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "intel_cpu"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateIntel_cpu(
+    id: Int!
+    base_clock_efficient_core: Float
+    base_clock_performance_core: Float
+    base_tdp_w: Int
+    code_name: String
+    efficient_cores: Int
+    generation: Int
+    gpu: String
+    l2_cache: String
+    launch_date: String
+    max_clock_rate_ghz: Float
+    model: String
+    performance_cores: Int
+    processor: String
+    smart_cache: String
+    socket: String
+    threads: Int
+    turbo_clock_efficient_core: Float
+    turbo_clock_performance_core: Float
+    turbo_tdp_w: Int
+  ): Intel_cpu
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "intel_cpu" SET
+        "base_clock_efficient_core" = COALESCE($2, "base_clock_efficient_core"),
+        "base_clock_performance_core" = COALESCE($3, "base_clock_performance_core"),
+        "base_tdp_w" = COALESCE($4, "base_tdp_w"),
+        "code_name" = COALESCE($5, "code_name"),
+        "efficient_cores" = COALESCE($6, "efficient_cores"),
+        "generation" = COALESCE($7, "generation"),
+        "gpu" = COALESCE($8, "gpu"),
+        "l2_cache" = COALESCE($9, "l2_cache"),
+        "launch_date" = COALESCE($10, "launch_date"),
+        "max_clock_rate_ghz" = COALESCE($11, "max_clock_rate_ghz"),
+        "model" = COALESCE($12, "model"),
+        "performance_cores" = COALESCE($13, "performance_cores"),
+        "processor" = COALESCE($14, "processor"),
+        "smart_cache" = COALESCE($15, "smart_cache"),
+        "socket" = COALESCE($16, "socket"),
+        "threads" = COALESCE($17, "threads"),
+        "turbo_clock_efficient_core" = COALESCE($18, "turbo_clock_efficient_core"),
+        "turbo_clock_performance_core" = COALESCE($19, "turbo_clock_performance_core"),
+        "turbo_tdp_w" = COALESCE($20, "turbo_tdp_w")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Products' "
+  deleteProducts(id: ID!): Products
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "products"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertProducts(
+    image_url: String!
+    quantity: String!
+    description: String!
+    price: String!
+    short_description: String!
+    user_id: String!
+    id: ID!
+    product_name: String!
+    created_at: DateTime!
+  ): Products
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "products"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateProducts(
+    id: ID!
+    created_at: DateTime
+    description: String
+    image_url: String
+    price: String
+    product_name: String
+    quantity: String
+    short_description: String
+    user_id: String
+  ): Products
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "products" SET
+        "created_at" = COALESCE($2, "created_at"),
+        "description" = COALESCE($3, "description"),
+        "image_url" = COALESCE($4, "image_url"),
+        "price" = COALESCE($5, "price"),
+        "product_name" = COALESCE($6, "product_name"),
+        "quantity" = COALESCE($7, "quantity"),
+        "short_description" = COALESCE($8, "short_description"),
+        "user_id" = COALESCE($9, "user_id")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Session' "
+  deleteSession(sessionToken: String!): Session
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "session"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSession(
+    expires: DateTime!
+    userId: ID!
+    sessionToken: String!
+  ): Session
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "session"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateSession(sessionToken: String!, expires: DateTime, userId: ID): Session
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "session" SET
+        "expires" = COALESCE($2, "expires"),
+        "userId" = COALESCE($3, "userId")
+      WHERE
+        "sessionToken" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'User' "
+  deleteUser(id: ID!): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "user"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertUser(
+    emailVerified: DateTime
+    image: String
+    id: ID!
+    password: String
+    name: String
+    isAdmin: Int
+    email: String!
+    role: String
+  ): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "user"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateUser(
+    id: ID!
+    email: String
+    emailVerified: DateTime
+    image: String
+    isAdmin: Int
+    name: String
+    password: String
+    role: String
+  ): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "user" SET
+        "email" = COALESCE($2, "email"),
+        "emailVerified" = COALESCE($3, "emailVerified"),
+        "image" = COALESCE($4, "image"),
+        "isAdmin" = COALESCE($5, "isAdmin"),
+        "name" = COALESCE($6, "name"),
+        "password" = COALESCE($7, "password"),
+        "role" = COALESCE($8, "role")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'VerificationToken' "
+  deleteVerificationToken(
+    identifier: String!
+    token: String!
+  ): VerificationToken
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "verificationToken"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertVerificationToken(
+    expires: DateTime!
+    token: String!
+    identifier: String!
+  ): VerificationToken
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "verificationToken"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateVerificationToken(
+    identifier: String!
+    token: String!
+    expires: DateTime
+  ): VerificationToken
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "verificationToken" SET
+        "expires" = COALESCE($3, "expires")
+      WHERE
+        "identifier" = $1 AND
+        "token" = $2
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+}

@@ -1,0 +1,569 @@
+{
+  "id": "83882660-6873-4cd5-bd39-fd4517d9a452",
+  "prevId": "fccbda47-1f6d-4711-8117-3898f5711c4b",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "account": {
+      "name": "account",
+      "schema": "",
+      "columns": {
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider": {
+          "name": "provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "providerAccountId": {
+          "name": "providerAccountId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "token_type": {
+          "name": "token_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_token": {
+          "name": "id_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "session_state": {
+          "name": "session_state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "account_userId_user_id_fk": {
+          "name": "account_userId_user_id_fk",
+          "tableFrom": "account",
+          "tableTo": "user",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "account_provider_providerAccountId_pk": {
+          "name": "account_provider_providerAccountId_pk",
+          "columns": [
+            "provider",
+            "providerAccountId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "case_specs": {
+      "name": "case_specs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "form_factor_mini_itx": {
+          "name": "form_factor_mini_itx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_flex_atx": {
+          "name": "form_factor_flex_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_mini_atx": {
+          "name": "form_factor_mini_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_micro_atx": {
+          "name": "form_factor_micro_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_atx": {
+          "name": "form_factor_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_e_atx": {
+          "name": "form_factor_e_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "form_factor_xl_atx": {
+          "name": "form_factor_xl_atx",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_power": {
+          "name": "front_io_power",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_reset": {
+          "name": "front_io_reset",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_2_0": {
+          "name": "front_io_usb_2_0",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_3_2_gen1a": {
+          "name": "front_io_usb_3_2_gen1a",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_3_2_gen2a": {
+          "name": "front_io_usb_3_2_gen2a",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_3_2_gen2x2a": {
+          "name": "front_io_usb_3_2_gen2x2a",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_3_2_gen2c": {
+          "name": "front_io_usb_3_2_gen2c",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_4_20gb_type_c": {
+          "name": "front_io_usb_4_20gb_type_c",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_usb_4_40gb_type_c": {
+          "name": "front_io_usb_4_40gb_type_c",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_io_audio_jack": {
+          "name": "front_io_audio_jack",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dimensions_length_mm": {
+          "name": "dimensions_length_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dimensions_width_mm": {
+          "name": "dimensions_width_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dimensions_height_mm": {
+          "name": "dimensions_height_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fan_capacity_120mm": {
+          "name": "fan_capacity_120mm",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fan_capacity_140mm": {
+          "name": "fan_capacity_140mm",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "water_cooling_front": {
+          "name": "water_cooling_front",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "water_cooling_top": {
+          "name": "water_cooling_top",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "water_cooling_bottom": {
+          "name": "water_cooling_bottom",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "water_cooling_rear": {
+          "name": "water_cooling_rear",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "housing_material_plastic": {
+          "name": "housing_material_plastic",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "housing_material_metal": {
+          "name": "housing_material_metal",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "housing_material_side_panel": {
+          "name": "housing_material_side_panel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "housing_material_front_panel": {
+          "name": "housing_material_front_panel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "psu_placement_top": {
+          "name": "psu_placement_top",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "psu_placement_bottom": {
+          "name": "psu_placement_bottom",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cable_routing_yes": {
+          "name": "cable_routing_yes",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cable_routing_no": {
+          "name": "cable_routing_no",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "storage_options_hdd_35": {
+          "name": "storage_options_hdd_35",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "storage_options_ssd_25": {
+          "name": "storage_options_ssd_25",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_cooler_height_mm": {
+          "name": "max_cooler_height_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_gpu_size_length_mm": {
+          "name": "max_gpu_size_length_mm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "products": {
+      "name": "products",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_name": {
+          "name": "product_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "short_description": {
+          "name": "short_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price": {
+          "name": "price",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "session": {
+      "name": "session",
+      "schema": "",
+      "columns": {
+        "sessionToken": {
+          "name": "sessionToken",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "session_userId_user_id_fk": {
+          "name": "session_userId_user_id_fk",
+          "tableFrom": "session",
+          "tableTo": "user",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emailVerified": {
+          "name": "emailVerified",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isAdmin": {
+          "name": "isAdmin",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "user_email_unique": {
+          "name": "user_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    },
+    "verificationToken": {
+      "name": "verificationToken",
+      "schema": "",
+      "columns": {
+        "identifier": {
+          "name": "identifier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "verificationToken_identifier_token_pk": {
+          "name": "verificationToken_identifier_token_pk",
+          "columns": [
+            "identifier",
+            "token"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

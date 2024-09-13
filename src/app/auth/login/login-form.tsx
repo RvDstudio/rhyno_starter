@@ -103,7 +103,7 @@ export const LoginForm = () => {
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
                 <Link
-                  href="#"
+                  href="/auth/reset"
                   className="ml-auto inline-block text-sm underline"
                 >
                   Forgot your password?
@@ -121,6 +121,7 @@ export const LoginForm = () => {
                 </span>
               )}
             </div>
+
             <Button
               type="submit"
               className="w-full bg-yellow-500 hover:bg-yellow-500/90"

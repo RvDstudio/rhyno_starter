@@ -40,7 +40,7 @@ export const Menus: MenuItem[] = [
     title: "Admin only Access",
     notification: 0,
     icon: <ShieldCheck className="w-5 h-5" />,
-    path: "/dashboard/product-upload",
+    path: "/dashboard/admin",
     isAdmin: true, // Only visible to admin
   },
   {

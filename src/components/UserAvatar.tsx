@@ -23,7 +23,7 @@ export default function UserAvatar() {
   const { data } = useSession({
     required: true,
     onUnauthenticated() {
-      router.push("/login");
+      router.push("/auth/login");
     },
   });
 
